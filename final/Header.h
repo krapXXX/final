@@ -37,20 +37,20 @@ bool game_over(char field[sn][sl]);
 
 void fill_field(char field[sn][sl])
 {
-	// Заповнюємо верхній рядок літерами і перший стовпець цифрами
+	// Г‡Г ГЇГ®ГўГ­ГѕВєГ¬Г® ГўГҐГ°ГµГ­ВіГ© Г°ГїГ¤Г®ГЄ Г«ВіГІГҐГ°Г Г¬ГЁ Ві ГЇГҐГ°ГёГЁГ© Г±ГІГ®ГўГЇГҐГ¶Гј Г¶ГЁГґГ°Г Г¬ГЁ
 	for (int i = 0; i < sl - 1; i++)
 	{
-		field[0][i + 1] = 'A' + i;  // Заповнюємо літерами
-		field[i + 1][0] = '0' + i;  // Заповнюємо цифрами
+		field[0][i + 1] = 'A' + i;  // Г‡Г ГЇГ®ГўГ­ГѕВєГ¬Г® Г«ВіГІГҐГ°Г Г¬ГЁ
+		field[i + 1][0] = '0' + i;  // Г‡Г ГЇГ®ГўГ­ГѕВєГ¬Г® Г¶ГЁГґГ°Г Г¬ГЁ
 	}
-	field[0][0] = ' ';  // Верхній лівий кут порожній
+	field[0][0] = ' ';  // Г‚ГҐГ°ГµГ­ВіГ© Г«ВіГўГЁГ© ГЄГіГІ ГЇГ®Г°Г®Г¦Г­ВіГ©
 
-	// Заповнюємо поле '0'
+	// Г‡Г ГЇГ®ГўГ­ГѕВєГ¬Г® ГЇГ®Г«ГҐ '0'
 	for (int i = 1; i < sl; i++)
 	{
 		for (int j = 1; j < sn; j++)
 		{
-			field[i][j] = '0';  // Порожня клітинка позначається '0'
+			field[i][j] = '0';  // ГЏГ®Г°Г®Г¦Г­Гї ГЄГ«ВіГІГЁГ­ГЄГ  ГЇГ®Г§Г­Г Г·Г ВєГІГјГ±Гї '0'
 		}
 	}
 }
@@ -102,16 +102,16 @@ void place_ship_all(char field[sn][sl])
 void place_ship_user(char field[sn][sl], int length)
 {
 	char direction;
-	bool placed = false;  // Прапорець, що вказує, чи було розміщено корабель
+	bool placed = false;  // ГЏГ°Г ГЇГ®Г°ГҐГ¶Гј, Г№Г® ГўГЄГ Г§ГіВє, Г·ГЁ ГЎГіГ«Г® Г°Г®Г§Г¬ВіГ№ГҐГ­Г® ГЄГ®Г°Г ГЎГҐГ«Гј
 
 	while (!placed) {
-		// Отримання початкових координат та напрямку від користувача
+		// ГЋГІГ°ГЁГ¬Г Г­Г­Гї ГЇГ®Г·Г ГІГЄГ®ГўГЁГµ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІ ГІГ  Г­Г ГЇГ°ГїГ¬ГЄГі ГўВіГ¤ ГЄГ®Г°ГЁГ±ГІГіГўГ Г·Г 
 		cout << "Enter the starting position for a " << length << "box ship: ";
 		cin >> letter_side >> number;
 		cout << "Enter direction (H for horizontal, V for vertical): ";
 		cin >> direction;
 
-		// Перетворення літери на індекс
+		// ГЏГҐГ°ГҐГІГўГ®Г°ГҐГ­Г­Гї Г«ВіГІГҐГ°ГЁ Г­Г  ВіГ­Г¤ГҐГЄГ±
 		for (int i = 0; i < sn; i++)
 		{
 			if (letter_side == field[0][i])
@@ -119,31 +119,31 @@ void place_ship_user(char field[sn][sl], int length)
 				letter = i;
 			}
 		}
-		number += 1;  // Збільшуємо номер, щоб узгодити з індексацією масиву
+		number += 1;  // Г‡ГЎВіГ«ГјГёГіВєГ¬Г® Г­Г®Г¬ГҐГ°, Г№Г®ГЎ ГіГ§ГЈГ®Г¤ГЁГІГЁ Г§ ВіГ­Г¤ГҐГЄГ±Г Г¶ВіВєГѕ Г¬Г Г±ГЁГўГі
 
-		// Перевірка коректності введених даних
+		// ГЏГҐГ°ГҐГўВіГ°ГЄГ  ГЄГ®Г°ГҐГЄГІГ­Г®Г±ГІВі ГўГўГҐГ¤ГҐГ­ГЁГµ Г¤Г Г­ГЁГµ
 		if (letter >= 0 && letter < sl && number >= 0 && number < sn && (direction == 'H' || direction == 'V'))
 		{
-			// Перевірка можливості розміщення корабля
+			// ГЏГҐГ°ГҐГўВіГ°ГЄГ  Г¬Г®Г¦Г«ГЁГўГ®Г±ГІВі Г°Г®Г§Г¬ВіГ№ГҐГ­Г­Гї ГЄГ®Г°Г ГЎГ«Гї
 			if (valid_place(field))
 			{
-				// Розміщення корабля
+				// ГђГ®Г§Г¬ВіГ№ГҐГ­Г­Гї ГЄГ®Г°Г ГЎГ«Гї
 				if (direction == 'H')
 				{
 					for (int i = 0; i < length; i++)
 					{
-						field[number][letter + i] = SHIP;  // Горизонтальне розміщення
+						field[number][letter + i] = SHIP;  // ГѓГ®Г°ГЁГ§Г®Г­ГІГ Г«ГјГ­ГҐ Г°Г®Г§Г¬ВіГ№ГҐГ­Г­Гї
 					}
 				}
 				else
 				{
 					for (int i = 0; i < length; i++)
 					{
-						field[number + i][letter] = SHIP;  // Вертикальне розміщення
+						field[number + i][letter] = SHIP;  // Г‚ГҐГ°ГІГЁГЄГ Г«ГјГ­ГҐ Г°Г®Г§Г¬ВіГ№ГҐГ­Г­Гї
 					}
 				}
-				placed = true;  // Корабель успішно розміщено
-				print_field(field);  // Виведення поля на екран
+				placed = true;  // ГЉГ®Г°Г ГЎГҐГ«Гј ГіГ±ГЇВіГёГ­Г® Г°Г®Г§Г¬ВіГ№ГҐГ­Г®
+				print_field(field);  // Г‚ГЁГўГҐГ¤ГҐГ­Г­Гї ГЇГ®Г«Гї Г­Г  ГҐГЄГ°Г Г­
 			}
 			else
 			{
@@ -160,7 +160,7 @@ void place_ship_user_all(char field[sn][sl])
 {
 
 	place_ship_user(field, 4);
-	/*for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 2; i++)
 	{
 	  place_ship_user(field, 3);
 	}
@@ -171,7 +171,7 @@ void place_ship_user_all(char field[sn][sl])
 	for (int i = 0; i < 4; i++)
 	{
 	  place_ship_user(field, 1);
-	}*/
+	}
 }
 bool valid_place(char field[sn][sl])
 {
@@ -202,7 +202,7 @@ bool valid_place(char field[sn][sl])
 }
 void print_field(char field[sn][sl])
 {
-	// Виведення ігрового поля на екран
+	// Г‚ГЁГўГҐГ¤ГҐГ­Г­Гї ВіГЈГ°Г®ГўГ®ГЈГ® ГЇГ®Г«Гї Г­Г  ГҐГЄГ°Г Г­
 	for (int i = 0; i < sn; i++)
 	{
 		for (int j = 0; j < sl; j++)
@@ -238,7 +238,7 @@ void make_move_user(char field[sn][sl])
 		cout << "Choose a box to fire: ";
 		cin >> letter_side >> number;
 
-		// Перетворення літери на індекс
+		// ГЏГҐГ°ГҐГІГўГ®Г°ГҐГ­Г­Гї Г«ВіГІГҐГ°ГЁ Г­Г  ВіГ­Г¤ГҐГЄГ±
 		for (int i = 0; i < sn; i++)
 		{
 			if (letter_side == field[0][i])
@@ -246,9 +246,9 @@ void make_move_user(char field[sn][sl])
 				letter = i;
 			}
 		}
-		number += 1;  // Збільшуємо номер, щоб узгодити з індексацією масиву
+		number += 1;  // Г‡ГЎВіГ«ГјГёГіВєГ¬Г® Г­Г®Г¬ГҐГ°, Г№Г®ГЎ ГіГ§ГЈГ®Г¤ГЁГІГЁ Г§ ВіГ­Г¤ГҐГЄГ±Г Г¶ВіВєГѕ Г¬Г Г±ГЁГўГі
 
-		// Перевірка коректності введених даних
+		// ГЏГҐГ°ГҐГўВіГ°ГЄГ  ГЄГ®Г°ГҐГЄГІГ­Г®Г±ГІВі ГўГўГҐГ¤ГҐГ­ГЁГµ Г¤Г Г­ГЁГµ
 		if (letter >= 0 && letter < sl && number >= 0 && number < sn)
 		{
 			if (field[number][letter] == SHIP)
@@ -261,7 +261,7 @@ void make_move_user(char field[sn][sl])
 			{
 				cout << "Miss!" << endl;
 				field[number][letter] = MISS;
-				fire = false;  // Завершуємо хід
+				fire = false;  // Г‡Г ГўГҐГ°ГёГіВєГ¬Г® ГµВіГ¤
 			}
 		}
 		else
@@ -277,10 +277,10 @@ void make_move_PC_easy(char field[sn][sl])
 	bool fire = true;
 	while (fire)
 	{
-		// Випадковий вибір координат
+		// Г‚ГЁГЇГ Г¤ГЄГ®ГўГЁГ© ГўГЁГЎВіГ° ГЄГ®Г®Г°Г¤ГЁГ­Г ГІ
 		letter = rand() % (sl - 1) + 1;
 		number = rand() % (sn - 1) + 1;
-		// Перевірка, чи не були ці координати вже використані
+		// ГЏГҐГ°ГҐГўВіГ°ГЄГ , Г·ГЁ Г­ГҐ ГЎГіГ«ГЁ Г¶Ві ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГЁ ГўГ¦ГҐ ГўГЁГЄГ®Г°ГЁГ±ГІГ Г­Ві
 		if (field[number][letter] != HIT && field[number][letter] != MISS)
 		{
 			if (field[number][letter] == SHIP)
@@ -292,7 +292,7 @@ void make_move_PC_easy(char field[sn][sl])
 			{
 				cout << "Miss!" << endl;
 				field[number][letter] = MISS;
-				fire = false;  // Завершуємо хід
+				fire = false;  // Г‡Г ГўГҐГ°ГёГіВєГ¬Г® ГµВіГ¤
 			}
 		}
 	}
